@@ -16,24 +16,46 @@ async def test_usecases_create_should_return_success(product_in):
 
 async def test_usecases_get_should_return_success(product_inserted):
     result = await product_usecase.get(id=product_inserted.id)
-
+    Breakpoint()
     assert isinstance(result, ProductOut)
     assert result.name == "Iphone 14 Pro Max"
 
 
 async def test_usecases_get_should_not_found():
     with pytest.raises(NotFoundException) as err:
-        await product_usecase.get(id=UUID("b087a6f8-0ec2-4866-954d-08f196395df9"))
-
+        await product_usecase.get(id=UUID("50f24eca-c461-451b-8d2a-cc1380416aad"))
+    
     assert (
-        err.value.message
-        == "Product not found with filter: b087a6f8-0ec2-4866-954d-08f196395df9"
+        err.value.message == "Product not found with filter: 50f24eca-c461-451b-8d2a-cc1380416aad"
     )
 
 
-@pytest.mark.usefixtures("product inserted")
+@pytest.mark.usefixtures("products_inserted")
 async def test_usecases_query_should_return_success():
     result = await product_usecase.query()
 
     assert isinstance(result, List)
-    assert len(result > 1)
+    assert len(result) > 1
+
+
+async def test_usecases_update_should_return_success(product_up, product_inserted):
+    product_up.price = "7.500"
+    result = await product_usecase.update(id=product_inserted.id, body=product_up)
+
+    assert isinstance(result, ProductUpdateOut)
+
+
+async def test_usecases_delete_should_return_success(product_inserted):
+    result = await product_usecase.delete(id=product_inserted.id)
+
+    assert result is True
+
+
+async def test_usecases_delete_should_not_found():
+    with pytest.raises(NotFoundException) as err:
+        await product_usecase.delete(id=UUID("6598c3ee-8e13-4010-a8dd-e064a0bd7a32"))
+
+    assert (
+        err.value.message
+        == "Product not found with filter: 6598c3ee-8e13-4010-a8dd-e064a0bd7a32"
+    )
