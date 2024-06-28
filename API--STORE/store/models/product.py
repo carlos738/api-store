@@ -1,6 +1,6 @@
-from store.model.base import CreateBaseModel
+from store.models.base import CreateBaseModel
 from store.schemas.product import ProductIn
 
 
-class ProductModel(ProductIN, CreateBaseModel):
+class ProductModel(ProductIn, CreateBaseModel):
     ...

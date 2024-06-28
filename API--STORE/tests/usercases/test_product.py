@@ -16,17 +16,18 @@ async def test_usecases_create_should_return_success(product_in):
 
 async def test_usecases_get_should_return_success(product_inserted):
     result = await product_usecase.get(id=product_inserted.id)
-    Breakpoint()
+
     assert isinstance(result, ProductOut)
     assert result.name == "Iphone 14 Pro Max"
 
 
 async def test_usecases_get_should_not_found():
     with pytest.raises(NotFoundException) as err:
-        await product_usecase.get(id=UUID("50f24eca-c461-451b-8d2a-cc1380416aad"))
-    
+        await product_usecase.get(id=UUID("bf954368-b0e7-45b8-b6c2-8e7ea10bc7f7"))
+
     assert (
-        err.value.message == "Product not found with filter: 50f24eca-c461-451b-8d2a-cc1380416aad"
+        err.value.message
+        == "Product not found with filter: bf954368-b0e7-45b8-b6c2-8e7ea10bc7f7"
     )
 
 
@@ -53,9 +54,9 @@ async def test_usecases_delete_should_return_success(product_inserted):
 
 async def test_usecases_delete_should_not_found():
     with pytest.raises(NotFoundException) as err:
-        await product_usecase.delete(id=UUID("6598c3ee-8e13-4010-a8dd-e064a0bd7a32"))
+        await product_usecase.delete(id=UUID("bf954368-b0e7-45b8-b6c2-8e7ea10bc7f7"))
 
     assert (
         err.value.message
-        == "Product not found with filter: 6598c3ee-8e13-4010-a8dd-e064a0bd7a32"
+        == "Product not found with filter: bf954368-b0e7-45b8-b6c2-8e7ea10bc7f7"
     )

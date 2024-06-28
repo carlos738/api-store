@@ -47,7 +47,7 @@ def products_url() -> str:
 
 @pytest.fixture
 def product_id() -> UUID:
-    return UUID("fce6cc37-10b9-4a8e-a8b2-977df327001a")
+    return UUID("0e861151-a795-4d6c-9d3b-f689c01c9270")
 
 
 @pytest.fixture

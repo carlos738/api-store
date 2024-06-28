@@ -24,8 +24,7 @@ class ProductUsecase:
         result = await self.collection.find_one({"id": id})
 
         if not result:
-            raise NotFoundException(
-                message=f"Product not found with filter: {id}")
+            raise NotFoundException(message=f"Product not found with filter: {id}")
 
         return ProductOut(**result)
 
@@ -44,8 +43,7 @@ class ProductUsecase:
     async def delete(self, id: UUID) -> bool:
         product = await self.collection.find_one({"id": id})
         if not product:
-            raise NotFoundException(
-                message=f"Product not found with filter: {id}")
+            raise NotFoundException(message=f"Product not found with filter: {id}")
 
         result = await self.collection.delete_one({"id": id})
 
