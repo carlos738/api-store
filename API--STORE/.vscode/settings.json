@@ -1,9 +1,0 @@
-{
-    "cSpell.words": [
-        "autouse"
-    ],
-    "dotnetAcquisitionExtension.enableTelemetry": false,
-    "gitlens.telemetry.enabled": false,
-    "dotnet.enableTelemetry": false,
-    "code-runner.enableAppInsights": false
-}
